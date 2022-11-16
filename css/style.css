@@ -62,6 +62,17 @@ button {
   color: var(--white);
 }
 
+.btn-grey {
+  border-color: grey;
+  background-color: lightgrey;
+  color: var(--black);
+}
+
+.btn-grey:hover {
+  background-color: grey;
+  color: var(--white);
+}
+
 /* Selects */
 
 select {
@@ -96,4 +107,9 @@ select {
 .fruitImages{
   width: 250px;
   height: 250px;
+}
+
+.disabled {
+  background: rgba(242,242,242,0.5);
+  color : rgba(207,207,207,0.5);
 }

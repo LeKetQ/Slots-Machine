@@ -1,14 +1,46 @@
 "use strict";
 
-window.addEventListener('load', initialize);
+window.addEventListener('load', initialise);
 
-/**
- * init functie
- */
-function initialize() {
-   console.log('init');   
-}
+// Global Variables
+const availableFruitsImages = ["../img/fruits/appelsien.jpg", "../img/fruits/banaan.png", "../img/fruits/druif.jpg", "../img/fruits/kers.jpg", "../img/fruits/peer.png"];
+let imgFruitsSlots;
+let btnRoll, btnStop, btnReplay;
+let interval;
+// ----------------------------------------
 
-/**
- * FUNCTIONS
- */
+// Start the system
+function initialise() {
+   bindElements();
+   setStartingImages();
+   addEventListeners();
+};
+// ----------------------------------------
+
+
+// Element binding
+function bindElements() {
+   imgFruitsSlots = document.querySelectorAll('#fruitSlots > img');
+   btnRoll = document.querySelector('#roll');
+   btnStop = document.querySelector('#stop');
+   btnReplay = document.querySelector('#replay');
+};
+// ----------------------------------------
+
+// Set starting slots image
+function setStartingImages() {
+   imgFruitsSlots.forEach(image => {
+      image.src = "../img/casino-slot-machine.png";
+      image.classList.add('fruitImages');
+   });
+};
+// ----------------------------------------
+
+// Event listeners
+function addEventListeners() {
+   btnRoll.addEventListener('click', rollFruits);
+   btnStop.addEventListener('click', stopFruits);
+   btnReplay.addEventListener('click', reset);
+};
+// ----------------------------------------
+

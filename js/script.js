@@ -44,3 +44,53 @@ function addEventListeners() {
 };
 // ----------------------------------------
 
+
+
+
+function rollFruits() {
+   btnStop.hidden = false;
+   btnRoll.hidden = true;
+   btnReplay.hidden = true;
+
+   interval = setInterval(spinTheFruits, 100);
+};
+
+function stopFruits() {
+   btnStop.hidden = true;
+   btnRoll.hidden = false;
+   btnReplay.hidden = false;
+
+   clearInterval(interval);
+   setScores();
+   countTurn();
+};
+
+function reset() {
+   setStartingImages();
+   clearScores();
+};
+
+
+
+// Spin the fruit images randomly
+function spinTheFruits() {
+   imgFruitsSlots.forEach(image => {
+      let random = Math.floor(Math.random() * availableFruitsImages.length);
+      image.src = availableFruitsImages[random];
+   })
+};
+// ----------------------------------------
+
+
+function countTurn() {
+
+};
+
+
+function setScores() {
+
+};
+
+function clearScores() {
+
+};

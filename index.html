@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Slot Machine</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="js/script.js"></script>
-    <link rel="stylesheet" href="css/style.css" />
+    <script src="./js/script.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
 
 </head>
 
@@ -16,16 +16,18 @@
 
     <h1 class="slot-machine">Play the game!</h1>
     <div class="slot-machine">
-        <img src="img/appelsien.jpg"></img>
-        <img src="img/banaan.png"></img>
-        <img src="img/druif.jpg"></img>
+        <section id="fruitSlots">
+            <img></img>
+            <img></img>
+            <img></img>
+        </section>
     </div>
 
 
     <div class="slot-machine">
-        <button class="btn-pink">Roll</button>
-        <button class="btn-yellow">Stop</button>
-        <button>Replay</button>
+        <button id="roll" class="btn-pink">Roll</button>
+        <button id="stop" class="btn-yellow">Stop</button>
+        <button id="replay">Replay</button>
     </div>
 
     <div class="slot-machine">

@@ -92,3 +92,8 @@ select {
   margin-top: 1pc;
   text-align: center;
 }
+
+.fruitImages{
+  width: 250px;
+  height: 250px;
+}

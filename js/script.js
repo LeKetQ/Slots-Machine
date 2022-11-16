@@ -13,10 +13,9 @@ let interval;
 function initialise() {
    bindElements();
    setStartingImages();
-   addEventListeners();
+   resetButtons();
 };
 // ----------------------------------------
-
 
 // Element binding
 function bindElements() {
@@ -36,41 +35,21 @@ function setStartingImages() {
 };
 // ----------------------------------------
 
-// Event listeners
-function addEventListeners() {
+// Reset buttons on startup and stop
+function resetButtons() {
    btnRoll.addEventListener('click', rollFruits);
-   btnStop.addEventListener('click', stopFruits);
-   btnReplay.addEventListener('click', reset);
+   btnRoll.classList.add('btn-pink');
+   btnStop.classList.add('disabled');
+   btnReplay.classList.add('disabled');
 };
 // ----------------------------------------
 
-
-
-
+// Cascade for the 'ROLL' button click event
 function rollFruits() {
-   btnStop.hidden = false;
-   btnRoll.hidden = true;
-   btnReplay.hidden = true;
-
    interval = setInterval(spinTheFruits, 100);
+   toggleButtons(0);
 };
-
-function stopFruits() {
-   btnStop.hidden = true;
-   btnRoll.hidden = false;
-   btnReplay.hidden = false;
-
-   clearInterval(interval);
-   setScores();
-   countTurn();
-};
-
-function reset() {
-   setStartingImages();
-   clearScores();
-};
-
-
+// ----------------------------------------
 
 // Spin the fruit images randomly
 function spinTheFruits() {
@@ -78,6 +57,57 @@ function spinTheFruits() {
       let random = Math.floor(Math.random() * availableFruitsImages.length);
       image.src = availableFruitsImages[random];
    })
+};
+// ----------------------------------------
+
+// Cascade for the 'STOP' button click event
+function stopFruits() {
+   clearInterval(interval);
+   toggleButtons(1);
+   setScores();
+   countTurn();
+};
+// ----------------------------------------
+
+// Cascade for the 'REPLAY' button click event
+function reset() {
+   clearScores();
+   clearCountTurn();
+   setStartingImages();
+   resetButtons();
+};
+// ----------------------------------------
+
+
+
+// Toggle buttons - Remove or Add event listeners and style
+function toggleButtons(input) {
+   if(input === 1) {
+      btnRoll.addEventListener('click', rollFruits);
+      btnRoll.classList.add('btn-pink');
+      btnRoll.classList.remove('disabled');
+
+      btnStop.removeEventListener('click', stopFruits);
+      btnStop.classList.remove('btn-yellow');
+      btnStop.classList.add('disabled');
+
+      btnReplay.addEventListener('click', reset);
+      btnReplay.classList.add('btn-grey');
+      btnReplay.classList.remove('disabled');
+   }
+   else {
+      btnRoll.removeEventListener('click', rollFruits);
+      btnRoll.classList.remove('btn-pink');
+      btnRoll.classList.add('disabled');
+
+      btnStop.addEventListener('click', stopFruits);
+      btnStop.classList.add('btn-yellow');
+      btnStop.classList.remove('disabled');
+
+      btnReplay.removeEventListener('click', reset);
+      btnReplay.classList.remove('btn-grey');
+      btnReplay.classList.add('disabled');
+   }
 };
 // ----------------------------------------
 
@@ -92,5 +122,9 @@ function setScores() {
 };
 
 function clearScores() {
+
+};
+
+function clearCountTurn() {
 
 };

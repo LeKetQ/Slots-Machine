@@ -7,6 +7,7 @@ const availableFruitsImages = ["../img/fruits/appelsien.jpg", "../img/fruits/ban
 let imgFruitsSlots;
 let btnRoll, btnStop, btnReplay;
 let interval;
+let turnCounter = 0;
 // ----------------------------------------
 
 // Start the system
@@ -46,13 +47,14 @@ function resetButtons() {
 
 // Cascade for the 'ROLL' button click event
 function rollFruits() {
-   interval = setInterval(spinTheFruits, 100);
-   toggleButtons(0);
+   interval = setInterval(randomiseFruits, 100);
+   toggleButtons(1);
+   turnCounter++;
 };
 // ----------------------------------------
 
 // Spin the fruit images randomly
-function spinTheFruits() {
+function randomiseFruits() {
    imgFruitsSlots.forEach(image => {
       let random = Math.floor(Math.random() * availableFruitsImages.length);
       image.src = availableFruitsImages[random];
@@ -63,58 +65,73 @@ function spinTheFruits() {
 // Cascade for the 'STOP' button click event
 function stopFruits() {
    clearInterval(interval);
-   toggleButtons(1);
+   if(turnCounter < 3){
+      toggleButtons(0);
+   }
+   else{
+      toggleButtons();
+   }
    setScores();
-   countTurn();
 };
 // ----------------------------------------
 
 // Cascade for the 'REPLAY' button click event
 function reset() {
    clearScores();
-   clearCountTurn();
+   turnCounter = 0;
    setStartingImages();
    resetButtons();
 };
 // ----------------------------------------
 
-
-
 // Toggle buttons - Remove or Add event listeners and style
 function toggleButtons(input) {
-   if(input === 1) {
-      btnRoll.addEventListener('click', rollFruits);
-      btnRoll.classList.add('btn-pink');
-      btnRoll.classList.remove('disabled');
+   switch(input) {
+      case 0:
+         btnRoll.addEventListener('click', rollFruits);
+         btnRoll.classList.add('btn-pink');
+         btnRoll.classList.remove('disabled');
 
-      btnStop.removeEventListener('click', stopFruits);
-      btnStop.classList.remove('btn-yellow');
-      btnStop.classList.add('disabled');
+         btnStop.removeEventListener('click', stopFruits);
+         btnStop.classList.remove('btn-yellow');
+         btnStop.classList.add('disabled');
 
-      btnReplay.addEventListener('click', reset);
-      btnReplay.classList.add('btn-grey');
-      btnReplay.classList.remove('disabled');
-   }
-   else {
-      btnRoll.removeEventListener('click', rollFruits);
-      btnRoll.classList.remove('btn-pink');
-      btnRoll.classList.add('disabled');
+         btnReplay.addEventListener('click', reset);
+         btnReplay.classList.add('btn-grey');
+         btnReplay.classList.remove('disabled');
+         break;
 
-      btnStop.addEventListener('click', stopFruits);
-      btnStop.classList.add('btn-yellow');
-      btnStop.classList.remove('disabled');
+      case 1:
+         btnRoll.removeEventListener('click', rollFruits);
+         btnRoll.classList.remove('btn-pink');
+         btnRoll.classList.add('disabled');
 
-      btnReplay.removeEventListener('click', reset);
-      btnReplay.classList.remove('btn-grey');
-      btnReplay.classList.add('disabled');
+         btnStop.addEventListener('click', stopFruits);
+         btnStop.classList.add('btn-yellow');
+         btnStop.classList.remove('disabled');
+
+         btnReplay.removeEventListener('click', reset);
+         btnReplay.classList.remove('btn-grey');
+         btnReplay.classList.add('disabled');
+         break;
+
+      default:
+         btnRoll.removeEventListener('click', rollFruits);
+         btnRoll.classList.remove('btn-pink');
+         btnRoll.classList.add('disabled');
+
+         btnStop.removeEventListener('click', stopFruits);
+         btnStop.classList.remove('btn-yellow');
+         btnStop.classList.add('disabled');
+
+         btnReplay.addEventListener('click', reset);
+         btnReplay.classList.add('btn-grey');
+         btnReplay.classList.remove('disabled');
+         break;
    }
 };
 // ----------------------------------------
 
-
-function countTurn() {
-
-};
 
 
 function setScores() {
@@ -125,6 +142,3 @@ function clearScores() {
 
 };
 
-function clearCountTurn() {
-
-};

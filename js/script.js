@@ -5,16 +5,15 @@ window.addEventListener('load', initialise);
 // Global Variables
 const availableFruitsImages = ["../img/fruits/appelsien.jpg", "../img/fruits/banaan.png", "../img/fruits/druif.jpg", "../img/fruits/kers.jpg", "../img/fruits/peer.png"];
 let imgFruitsSlots;
-let btnRoll, btnStop, btnReplay;
+let btnRoll, btnStop, btnReplay, lblScore, lblRollCounter, lblScoreHistory;
 let interval;
-let turnCounter = 0;
+let rollCounter = 0;
 // ----------------------------------------
 
 // Start the system
 function initialise() {
    bindElements();
-   setStartingImages();
-   resetButtons();
+   reset();
 };
 // ----------------------------------------
 
@@ -24,6 +23,9 @@ function bindElements() {
    btnRoll = document.querySelector('#roll');
    btnStop = document.querySelector('#stop');
    btnReplay = document.querySelector('#replay');
+   lblScore = document.querySelector('#score');
+   lblScoreHistory = document.querySelector('#scoreHistory');
+   lblRollCounter = document.querySelector('#rollCounter');
 };
 // ----------------------------------------
 
@@ -36,20 +38,12 @@ function setStartingImages() {
 };
 // ----------------------------------------
 
-// Reset buttons on startup and stop
-function resetButtons() {
-   btnRoll.addEventListener('click', rollFruits);
-   btnRoll.classList.add('btn-pink');
-   btnStop.classList.add('disabled');
-   btnReplay.classList.add('disabled');
-};
-// ----------------------------------------
-
 // Cascade for the 'ROLL' button click event
 function rollFruits() {
    interval = setInterval(randomiseFruits, 100);
    toggleButtons(1);
-   turnCounter++;
+   rollCounter++;
+   lblRollCounter.textContent = `Aantal rolls: ${rollCounter} / 3`;
 };
 // ----------------------------------------
 
@@ -65,28 +59,30 @@ function randomiseFruits() {
 // Cascade for the 'STOP' button click event
 function stopFruits() {
    clearInterval(interval);
-   if(turnCounter < 3){
+   if (rollCounter < 3) {
       toggleButtons(0);
    }
-   else{
-      toggleButtons();
+   else {
+      toggleButtons(2);
    }
-   setScores();
+   lblScore.textContent = `Score: ${calculateScore()}`;
+   lblScoreHistory.textContent += `*${calculateScore()}* `;
 };
 // ----------------------------------------
 
 // Cascade for the 'REPLAY' button click event
 function reset() {
    clearScores();
-   turnCounter = 0;
+   rollCounter = 0;
+   lblRollCounter.textContent = `Aantal rolls: ${rollCounter} / 3`;
    setStartingImages();
-   resetButtons();
+   toggleButtons();
 };
 // ----------------------------------------
 
 // Toggle buttons - Remove or Add event listeners and style
 function toggleButtons(input) {
-   switch(input) {
+   switch (input) {
       case 0:
          btnRoll.addEventListener('click', rollFruits);
          btnRoll.classList.add('btn-pink');
@@ -115,7 +111,7 @@ function toggleButtons(input) {
          btnReplay.classList.add('disabled');
          break;
 
-      default:
+      case 2:
          btnRoll.removeEventListener('click', rollFruits);
          btnRoll.classList.remove('btn-pink');
          btnRoll.classList.add('disabled');
@@ -128,15 +124,42 @@ function toggleButtons(input) {
          btnReplay.classList.add('btn-grey');
          btnReplay.classList.remove('disabled');
          break;
+
+      default:
+         btnRoll.addEventListener('click', rollFruits);
+         btnRoll.classList.add('btn-pink');
+         btnRoll.classList.remove('disabled');
+
+         btnStop.removeEventListener('click', stopFruits);
+         btnStop.classList.remove('btn-yellow');
+         btnStop.classList.add('disabled');
+
+         btnReplay.removeEventListener('click', reset);
+         btnReplay.classList.remove('btn-grey');
+         btnReplay.classList.add('disabled');
+         break;
    }
 };
 // ----------------------------------------
 
 
+// Add 100 points for each similar element 
+function calculateScore() {
+   let score = 0;
+   let result = new Array();
 
-function setScores() {
+   imgFruitsSlots.forEach(element => {
+      result.push(element.src);
+   });
 
+   result.forEach(element => {
+      if (result.includes(element, result.indexOf(element) + 1)) {
+         score += 100;
+      }
+   });
+   return score;
 };
+// ----------------------------------------
 
 function clearScores() {
 

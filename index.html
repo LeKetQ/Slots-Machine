@@ -8,12 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="./js/script.js"></script>
     <link rel="stylesheet" href="./css/style.css" />
-
 </head>
 
 <body>
-
-
     <h1 class="slot-machine">Play the game!</h1>
     <div class="slot-machine">
         <section id="fruitSlots">
@@ -23,18 +20,21 @@
         </section>
     </div>
 
-
     <div class="slot-machine">
-        <button id="roll">Roll</button>
-        <button id="stop">Stop</button>
-        <button id="replay">Replay</button>
+        <section>
+            <button id="roll">Roll</button>
+            <button id="stop">Stop</button>
+            <button id="replay">Replay</button>
+        </section>
     </div>
 
     <div class="slot-machine">
-        <p>Score: </p>
-        <p>Score historiek:</p>
-        <p>Aantal rolls: </p>
-        <p>Opmerkingen</p>
+        <section>
+            <label id="score">Score: </label><br />
+            <label id="scoreHistory">Score historiek: </label><br />
+            <label id="rollCounter">Aantal rolls: </label><br />
+            <p id="feedback">Opmerkingen</p>
+        </section>
     </div>
 </body>
 

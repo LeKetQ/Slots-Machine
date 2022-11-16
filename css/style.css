@@ -82,7 +82,7 @@ select {
   border-style: solid;
 }
 
-.floatrechts{
+.floatrechts {
   float: right;
 }
 /*custom*/
@@ -104,7 +104,7 @@ select {
   text-align: center;
 }
 
-.fruitImages{
+.fruitImage {
   width: 250px;
   height: 250px;
 }
@@ -112,4 +112,8 @@ select {
 .disabled {
   background: rgba(242,242,242,0.5);
   color : rgba(207,207,207,0.5);
+}
+
+#feedback {
+  background-color: var(--pink);
 }

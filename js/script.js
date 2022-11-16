@@ -3,8 +3,8 @@
 window.addEventListener('load', initialise);
 
 // Global Variables
-const availableFruitsImages = ["../img/fruits/appelsien.jpg", "../img/fruits/banaan.png", "../img/fruits/druif.jpg", "../img/fruits/kers.jpg", "../img/fruits/peer.png"];
-let imgFruitsSlots, btnRoll, btnStop, btnReplay, lblScore, lblRollCounter, lblScoreHistory, lblFeedback;
+const availableFruitImages = ["../img/fruits/appelsien.jpg", "../img/fruits/banaan.png", "../img/fruits/druif.jpg", "../img/fruits/kers.jpg", "../img/fruits/peer.png"];
+let sctFruitSlots, btnRoll, btnStop, btnReplay, lblScore, lblRollCounter, lblScoreHistory, lblFeedback;
 let interval, rollCounter = 0;
 // ----------------------------------------
 
@@ -17,7 +17,7 @@ function initialise() {
 
 // Element binding
 function bindElements() {
-   imgFruitsSlots = document.querySelectorAll('#fruitSlots > img');
+   sctFruitSlots = document.querySelectorAll('#fruitSlots > img');
    btnRoll = document.querySelector('#roll');
    btnStop = document.querySelector('#stop');
    btnReplay = document.querySelector('#replay');
@@ -31,14 +31,15 @@ function bindElements() {
 // Cascade for 'STARTUP' or 'REPLAY' button event
 function reset() {
    toggleButtonEvents();
-   imgFruitsSlots.forEach(image => {
-      image.src = "../img/casino-slot-machine.png";
-      image.classList.add('fruitImages');
+   sctFruitSlots.forEach(slot => {
+      slot.src = "../img/casino-slot-machine.png";
+      slot.classList.add('fruitImage');
    });
    rollCounter = 0;
    lblRollCounter.textContent = `Aantal rolls: ${rollCounter} / 3`;
    lblScore.textContent = 'Score: ';
    lblScoreHistory.textContent = 'Score historiek: ';
+   lblFeedback.textContent = '';
 };
 // ----------------------------------------
 
@@ -53,9 +54,9 @@ function rollFruits() {
 
 // Spin the fruit images randomly
 function randomiseFruits() {
-   imgFruitsSlots.forEach(image => {
-      let random = Math.floor(Math.random() * availableFruitsImages.length);
-      image.src = availableFruitsImages[random];
+   sctFruitSlots.forEach(slot => {
+      let random = Math.floor(Math.random() * availableFruitImages.length);
+      slot.src = availableFruitImages[random];
    })
 };
 // ----------------------------------------
@@ -68,6 +69,7 @@ function stopFruits() {
    }
    else {
       toggleButtonEvents(2);
+      lblFeedback.textContent = 'GAME OVER';
    }
    lblScore.textContent = `Score: ${calculateScore()}`;
    lblScoreHistory.textContent += `*${calculateScore()}* `;
@@ -77,14 +79,14 @@ function stopFruits() {
 // Add 100 points for each similar element 
 function calculateScore() {
    let score = 0;
-   let result = new Array();
+   let results = [];
 
-   imgFruitsSlots.forEach(element => {
-      result.push(element.src);
+   sctFruitSlots.forEach(slot => {
+      results.push(slot.src);
    });
 
-   result.forEach(element => {
-      if (result.includes(element, result.indexOf(element) + 1)) {
+   results.forEach(result => {
+      if (results.includes(result, results.indexOf(result) + 1)) {
          score += 100;
       }
    });
@@ -93,7 +95,11 @@ function calculateScore() {
 // ----------------------------------------
 
 
+
+
 // Toggle buttons - Remove or Add event listeners and style
+// TRY AND USE PROP
+// btnRoll.prop('disabled', true);
 function toggleButtonEvents(input) {
    switch (input) {
       case 0:

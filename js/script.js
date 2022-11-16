@@ -64,7 +64,7 @@ function randomiseFruits() {
 // Cascade for the 'STOP' button click event
 function stopFruits() {
    clearInterval(interval);
-   if (rollCounter < 3) {
+   if(rollCounter < 3) {
       toggleButtonEvents(0);
    }
    else {
@@ -101,7 +101,7 @@ function calculateScore() {
 // TRY AND USE PROP
 // btnRoll.prop('disabled', true);
 function toggleButtonEvents(input) {
-   switch (input) {
+   switch(input) {
       case 0:
          btnRoll.addEventListener('click', rollFruits);
          btnRoll.classList.add('btn-pink');

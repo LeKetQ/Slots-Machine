@@ -72,7 +72,7 @@ function stopFruits() {
       lblFeedback.textContent = 'GAME OVER';
    }
    lblScore.textContent = `Score: ${calculateScore()}`;
-   lblScoreHistory.textContent += `*${calculateScore()}* `;
+   lblScoreHistory.textContent += `*Game ${rollCounter}: ${calculateScore()}* `;
 };
 // ----------------------------------------
 
@@ -94,14 +94,10 @@ function calculateScore() {
 };
 // ----------------------------------------
 
-
-
-
 // Toggle buttons - Remove or Add event listeners and style
-// TRY AND USE PROP
-// btnRoll.prop('disabled', true);
 function toggleButtonEvents(input) {
    switch(input) {
+         // GAME IN PROGRESS - 'ROLL' and 'REPLAY' buttons available
       case 0:
          btnRoll.addEventListener('click', rollFruits);
          btnRoll.classList.add('btn-pink');
@@ -116,6 +112,7 @@ function toggleButtonEvents(input) {
          btnReplay.classList.remove('disabled');
          break;
 
+         // GAME IN PROGRESS - 'STOP' button only
       case 1:
          btnRoll.removeEventListener('click', rollFruits);
          btnRoll.classList.remove('btn-pink');
@@ -130,6 +127,7 @@ function toggleButtonEvents(input) {
          btnReplay.classList.add('disabled');
          break;
 
+         // GAME OVER - 'REPLAY' button only
       case 2:
          btnRoll.removeEventListener('click', rollFruits);
          btnRoll.classList.remove('btn-pink');
@@ -144,6 +142,7 @@ function toggleButtonEvents(input) {
          btnReplay.classList.remove('disabled');
          break;
 
+         // NEW GAME - 'ROLL' button only
       default:
          btnRoll.addEventListener('click', rollFruits);
          btnRoll.classList.add('btn-pink');

@@ -66,15 +66,18 @@ function randomiseFruits() {
 
 // Cascade for the 'STOP' button click event
 function stopFruits() {
+   let rollScore = 0;
    clearInterval(interval);
-   totalScore += calculateScore();
-   lblScore.textContent = `Score: ${calculateScore()}`;
-   lblScoreHistory.textContent += `*Game ${rollCounter}: ${calculateScore()}* `;
+   rollScore = calculateScore();
+   totalScore += rollScore;
+   lblScore.textContent = `Score: ${rollScore}`;
+   lblScoreHistory.textContent += `*Game ${rollCounter}: ${rollScore}* `;
    if(rollCounter < 3) {
       toggleButtonEvents(0);
       lblFeedback.textContent = `Total score: ${totalScore}`;
-      if(calculateScore() > 0){
+      if(rollScore > 0){
          figFeedback.innerHTML = '<img src="./img/winner.gif">';
+         // setTimeout(figFeedback.innerHTML = '<img src="./img/winner.gif">', 2000);
       }
    }
    else {

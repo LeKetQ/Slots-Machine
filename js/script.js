@@ -68,14 +68,23 @@ function stopFruits() {
    totalScore += calculateScore();
    lblScore.textContent = `Score: ${calculateScore()}`;
    lblScoreHistory.textContent += `*Game ${rollCounter}: ${calculateScore()}* `;
-
    if(rollCounter < 3) {
       toggleButtonEvents(0);
       lblFeedback.textContent = `Total score: ${totalScore}`;
+      if(totalScore > 0){
+         let imgWinner = document.createElement('div');
+         imgWinner.innerHTML += '<img src="./img/winner.gif">';
+         lblFeedback.appendChild(imgWinner);
+      }
    }
    else {
       toggleButtonEvents(2);
       lblFeedback.textContent = `GAME OVER - Total score: ${totalScore}`;
+      if(totalScore === 600){
+         let imgJackpot = document.createElement('div');
+         imgJackpot.innerHTML += '<img src="./img/jackpot.gif">';
+         lblFeedback.appendChild(imgJackpot);
+      }
    }
 };
 // ----------------------------------------

@@ -5,7 +5,7 @@ window.addEventListener('load', initialise);
 // Global Variables
 const availableFruitImages = ["../img/fruits/appelsien.jpg", "../img/fruits/banaan.png", "../img/fruits/druif.jpg", "../img/fruits/kers.jpg", "../img/fruits/peer.png"];
 let sctFruitSlots, btnRoll, btnStop, btnReplay, lblScore, lblRollCounter, lblScoreHistory, lblFeedback;
-let interval, rollCounter = 0;
+let interval, rollCounter = 0, totalScore = 0;
 // ----------------------------------------
 
 // Start the system
@@ -36,6 +36,7 @@ function reset() {
       slot.classList.add('fruitImage');
    });
    rollCounter = 0;
+   totalScore = 0;
    lblRollCounter.textContent = `Aantal rolls: ${rollCounter} / 3`;
    lblScore.textContent = 'Score: ';
    lblScoreHistory.textContent = 'Score historiek: ';
@@ -64,15 +65,18 @@ function randomiseFruits() {
 // Cascade for the 'STOP' button click event
 function stopFruits() {
    clearInterval(interval);
+   totalScore += calculateScore();
+   lblScore.textContent = `Score: ${calculateScore()}`;
+   lblScoreHistory.textContent += `*Game ${rollCounter}: ${calculateScore()}* `;
+
    if(rollCounter < 3) {
       toggleButtonEvents(0);
+      lblFeedback.textContent = `Total score: ${totalScore}`;
    }
    else {
       toggleButtonEvents(2);
-      lblFeedback.textContent = 'GAME OVER';
+      lblFeedback.textContent = `GAME OVER - Total score: ${totalScore}`;
    }
-   lblScore.textContent = `Score: ${calculateScore()}`;
-   lblScoreHistory.textContent += `*Game ${rollCounter}: ${calculateScore()}* `;
 };
 // ----------------------------------------
 

@@ -42,6 +42,7 @@ function reset() {
    lblScore.textContent = 'Score: ';
    lblScoreHistory.textContent = 'Score historiek: ';
    lblFeedback.textContent = '';
+   figFeedback.innerHTML = '';
 };
 // ----------------------------------------
 
@@ -72,19 +73,32 @@ function stopFruits() {
    totalScore += rollScore;
    lblScore.textContent = `Score: ${rollScore}`;
    lblScoreHistory.textContent += `*Game ${rollCounter}: ${rollScore}* `;
+
+   // Add a picture on winning roll
+   switch(rollScore){
+      case 200:
+         figFeedback.innerHTML = '<img src="./img/winner.gif">';
+         break;
+      case 300:
+         figFeedback.innerHTML = '<img src="./img/jackpot.gif">';
+         break;
+      default:
+         figFeedback.innerHTML = '';
+         break;
+   }
+
+   // Toggle buttons when game is in play, and return total score
    if(rollCounter < 3) {
       toggleButtonEvents(0);
       lblFeedback.textContent = `Total score: ${totalScore}`;
-      if(rollScore > 0){
-         figFeedback.innerHTML = '<img src="./img/winner.gif">';
-         // setTimeout(figFeedback.innerHTML = '<img src="./img/winner.gif">', 2000);
-      }
    }
+   // Toggle buttons on end game and return message
+       // Add a high score picture on scoring 900 points
    else {
       toggleButtonEvents(2);
       lblFeedback.textContent = `GAME OVER - Total score: ${totalScore}`;
       if(totalScore === 900){
-         figFeedback.innerHTML = '<img src="./img/jackpot.gif">';
+         figFeedback.innerHTML = '<img src="./img/high-score.gif">';
       }
    }
 };

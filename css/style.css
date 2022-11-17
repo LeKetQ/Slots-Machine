@@ -16,7 +16,8 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  background-color: var(--white);
+  background-image: url('../img/slotsBackground.jpg');
+  background-size: cover;
   color: var(--black);
 }
 
@@ -116,4 +117,9 @@ select {
 
 #feedback {
   background-color: var(--pink);
+}
+
+.figure{
+  width: 250px;
+  height: 250px;
 }

@@ -98,7 +98,7 @@ function stopFruits() {
       toggleButtonEvents(2);
       lblFeedback.textContent = `GAME OVER - Total score: ${totalScore}`;
       if(totalScore === 900){
-         figFeedback.innerHTML = '<img src="./img/high-score.gif">';
+         figFeedback.innerHTML = '<img class="fruitImage" src="./img/high-score.gif">';
       }
    }
 };
@@ -114,7 +114,7 @@ function calculateScore() {
    });
 
    results.forEach(result => {
-      if (results.includes(result, results.indexOf(result) + 1)) {
+      if(results.includes(result, results.indexOf(result) + 1)) {
          score += 100;
       }
    });

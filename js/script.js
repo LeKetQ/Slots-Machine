@@ -92,8 +92,7 @@ function stopFruits() {
       toggleButtonEvents(0);
       lblFeedback.textContent = `Total score: ${totalScore}`;
    }
-   // Toggle buttons on end game and return message
-       // Add a high score picture on scoring 900 points
+   // Toggle buttons on end game and return messageand add a high score picture on scoring 900 points
    else {
       toggleButtonEvents(2);
       lblFeedback.textContent = `GAME OVER - Total score: ${totalScore}`;

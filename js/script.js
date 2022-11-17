@@ -4,7 +4,7 @@ window.addEventListener('load', initialise);
 
 // Global Variables
 const availableFruitImages = ["../img/fruits/appelsien.jpg", "../img/fruits/banaan.png", "../img/fruits/druif.jpg", "../img/fruits/kers.jpg", "../img/fruits/peer.png"];
-let sctFruitSlots, btnRoll, btnStop, btnReplay, lblScore, lblRollCounter, lblScoreHistory, lblFeedback;
+let sctFruitSlots, btnRoll, btnStop, btnReplay, lblScore, lblRollCounter, lblScoreHistory, lblFeedback, figFeedback;
 let interval, rollCounter = 0, totalScore = 0;
 // ----------------------------------------
 
@@ -25,6 +25,7 @@ function bindElements() {
    lblScoreHistory = document.querySelector('#scoreHistory');
    lblRollCounter = document.querySelector('#rollCounter');
    lblFeedback = document.querySelector('#feedback');
+   figFeedback = document.querySelector('#figure');
 };
 // ----------------------------------------
 
@@ -47,6 +48,7 @@ function reset() {
 // Cascade for the 'ROLL' button click event
 function rollFruits() {
    interval = setInterval(randomiseFruits, 100);
+   figFeedback.innerHTML = '';
    toggleButtonEvents(1);
    rollCounter++;
    lblRollCounter.textContent = `Aantal rolls: ${rollCounter} / 3`;
@@ -71,19 +73,15 @@ function stopFruits() {
    if(rollCounter < 3) {
       toggleButtonEvents(0);
       lblFeedback.textContent = `Total score: ${totalScore}`;
-      if(totalScore > 0){
-         let imgWinner = document.createElement('div');
-         imgWinner.innerHTML += '<img src="./img/winner.gif">';
-         lblFeedback.appendChild(imgWinner);
+      if(calculateScore() > 0){
+         figFeedback.innerHTML = '<img src="./img/winner.gif">';
       }
    }
    else {
       toggleButtonEvents(2);
       lblFeedback.textContent = `GAME OVER - Total score: ${totalScore}`;
-      if(totalScore === 600){
-         let imgJackpot = document.createElement('div');
-         imgJackpot.innerHTML += '<img src="./img/jackpot.gif">';
-         lblFeedback.appendChild(imgJackpot);
+      if(totalScore === 900){
+         figFeedback.innerHTML = '<img src="./img/jackpot.gif">';
       }
    }
 };

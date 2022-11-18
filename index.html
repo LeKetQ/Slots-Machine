@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
     <h1 id="title" class="slot-machine">Lucky Seven Slots!</h1>
 
     <section id="fruitSlots" class="slot-machine">
@@ -27,21 +28,29 @@
     </section>
 
     <section id="feedback" class="slot-machine">
-        <figure id="figure" class="slot-machine fruitImage"></figure>
-        <section id="score" class="slot-machine">
-            <label id="rollScore">Score: </label><br />
-            <label id="scoreHistory">Score history:
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </label><br />
 
-            <label id="rollCounter">Total rolls: </label><br />
-            <label id="feedbackLabel"></label>
+        <figure id="figure" class="slot-machine fruitImage"></figure>
+
+        <section id="score" class="slot-machine">
+            <section id="rollHistory">
+                <h3>Roll History</h3><br />
+                <label id="rollScore">Score: </label><br />
+                <label id="rollCounter">Total rolls: </label><br /><br />
+                <label id="gameOver"></label>
+            </section>
+
+            <section id="gameHistory">
+                <h3>Game History</h3><br />
+                <label id="totalScore"></label><br /><br />
+                <label id="scoreHistory">Score history:
+                    <ul id="gameScore">
+                    </ul>
+                </label><br />
+            </section>
         </section>
+
     </section>
+
 </body>
 
 </html>

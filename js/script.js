@@ -105,7 +105,7 @@ function stopFruits() {
       lblTotalScore.textContent = `Total score: ${totalScore}`;
       lblGameOver.innerHTML = `<strong class="highlight">GAME OVER</strong>`;
       if(totalScore === 900){
-         figFeedback.innerHTML = '<img class="fruitImage" src="./img/high-score.gif">';
+         figFeedback.innerHTML = '<img class="fruitImage" src="./img/highScore.gif">';
       }
    }
 };

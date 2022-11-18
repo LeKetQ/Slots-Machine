@@ -4,7 +4,7 @@ window.addEventListener('load', initialise);
 
 // Global Variables
 const fruitImages = ["../img/fruits/cherry.png", "../img/fruits/goldBag.png", "../img/fruits/grapefruit.png", "../img/fruits/luckySeven.png", "../img/fruits/pomegranate.png"];
-let sctFruitSlots, btnRoll, btnStop, btnReplay, lblRollScore, lblRollCounter, lblScoreHistory, lblFeedback, figFeedback;
+let sctFruitSlots, btnRoll, btnStop, btnReplay, lblRollScore, lblRollCounter, lblScoreHistory, lblTotalScore, lblGameOver, figFeedback, ulGameScore;
 let interval, rollCounter = 0, totalScore = 0;
 // ----------------------------------------
 
@@ -24,8 +24,10 @@ function bindElements() {
    lblRollScore = document.querySelector('#rollScore');
    lblScoreHistory = document.querySelector('#scoreHistory');
    lblRollCounter = document.querySelector('#rollCounter');
-   lblFeedback = document.querySelector('#feedbackLabel');
+   lblTotalScore = document.querySelector('#totalScore');
    figFeedback = document.querySelector('#figure');
+   ulGameScore = document.querySelector('#gameScore');
+   lblGameOver = document.querySelector('#gameOver');
 };
 // ----------------------------------------
 
@@ -41,7 +43,9 @@ function reset() {
    lblRollCounter.textContent = `Total rolls: ${rollCounter} / 3`;
    lblRollScore.textContent = 'Score: ';
    lblScoreHistory.textContent = 'Score history: ';
-   lblFeedback.textContent = '';
+   lblTotalScore.textContent = 'Total score: ';
+   lblGameOver.textContent = '';
+   ulGameScore.innerHTML = '';
    figFeedback.innerHTML = '';
 };
 // ----------------------------------------
@@ -52,7 +56,7 @@ function rollFruits() {
    figFeedback.innerHTML = '';
    toggleButtonEvents(1);
    rollCounter++;
-   lblRollCounter.textContent = `Aantal rolls: ${rollCounter} / 3`;
+   lblRollCounter.textContent = `Total rolls: ${rollCounter} / 3`;
 };
 // ----------------------------------------
 
@@ -72,7 +76,10 @@ function stopFruits() {
    rollScore = calculateScore();
    totalScore += rollScore;
    lblRollScore.textContent = `Score: ${rollScore}`;
-   lblScoreHistory.textContent += `Game ${rollCounter}: ${rollScore}\n`;
+
+   // Create score history list
+   ulGameScore.appendChild(createGameScoreListItem(rollCounter, rollScore));
+   lblScoreHistory.appendChild(ulGameScore);
 
    // Add a picture on winning roll
    switch(rollScore){
@@ -90,12 +97,13 @@ function stopFruits() {
    // Toggle buttons when game is in play, and return total score
    if(rollCounter < 3) {
       toggleButtonEvents(0);
-      lblFeedback.textContent = `Total score: ${totalScore}`;
+      lblTotalScore.textContent = `Total score: ${totalScore}`;
    }
-   // Toggle buttons on end game and return messageand add a high score picture on scoring 900 points
+   // Toggle buttons on end game, return message and add a high score picture on scoring 900 points
    else {
       toggleButtonEvents(2);
-      lblFeedback.textContent = `GAME OVER - Total score: ${totalScore}`;
+      lblTotalScore.textContent = `Total score: ${totalScore}`;
+      lblGameOver.innerHTML = `<strong class="highlight">GAME OVER</strong>`;
       if(totalScore === 900){
          figFeedback.innerHTML = '<img class="fruitImage" src="./img/high-score.gif">';
       }
@@ -118,6 +126,14 @@ function calculateScore() {
       }
    });
    return score;
+};
+// ----------------------------------------
+
+// Create list element for the score history
+function createGameScoreListItem(roll, score) {
+   let listItem = document.createElement('li');
+   listItem.textContent += `Game ${roll}: ${score}`;
+   return listItem;
 };
 // ----------------------------------------
 

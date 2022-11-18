@@ -53,8 +53,8 @@ function reset() {
 // Cascade for the 'ROLL' button click event
 function rollFruits() {
    interval = setInterval(randomiseFruits, 100);
-   figFeedback.innerHTML = '';
    toggleButtonEvents(1);
+   figFeedback.innerHTML = '';
    rollCounter++;
    lblRollCounter.textContent = `Total rolls: ${rollCounter} / 3`;
 };

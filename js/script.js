@@ -4,7 +4,7 @@ window.addEventListener('load', initialise);
 
 // Global Variables
 const fruitImages = ["../img/fruits/cherry.png", "../img/fruits/goldBag.png", "../img/fruits/grapefruit.png", "../img/fruits/luckySeven.png", "../img/fruits/pomegranate.png"];
-let sctFruitSlots, btnRoll, btnStop, btnReplay, lblScore, lblRollCounter, lblScoreHistory, lblFeedback, figFeedback;
+let sctFruitSlots, btnRoll, btnStop, btnReplay, lblRollScore, lblRollCounter, lblScoreHistory, lblFeedback, figFeedback;
 let interval, rollCounter = 0, totalScore = 0;
 // ----------------------------------------
 
@@ -21,10 +21,10 @@ function bindElements() {
    btnRoll = document.querySelector('#roll');
    btnStop = document.querySelector('#stop');
    btnReplay = document.querySelector('#replay');
-   lblScore = document.querySelector('#score');
+   lblRollScore = document.querySelector('#rollScore');
    lblScoreHistory = document.querySelector('#scoreHistory');
    lblRollCounter = document.querySelector('#rollCounter');
-   lblFeedback = document.querySelector('#feedback');
+   lblFeedback = document.querySelector('#feedbackLabel');
    figFeedback = document.querySelector('#figure');
 };
 // ----------------------------------------
@@ -38,9 +38,9 @@ function reset() {
    });
    rollCounter = 0;
    totalScore = 0;
-   lblRollCounter.textContent = `Aantal rolls: ${rollCounter} / 3`;
-   lblScore.textContent = 'Score: ';
-   lblScoreHistory.textContent = 'Score historiek: ';
+   lblRollCounter.textContent = `Total rolls: ${rollCounter} / 3`;
+   lblRollScore.textContent = 'Score: ';
+   lblScoreHistory.textContent = 'Score history: ';
    lblFeedback.textContent = '';
    figFeedback.innerHTML = '';
 };
@@ -71,8 +71,8 @@ function stopFruits() {
    clearInterval(interval);
    rollScore = calculateScore();
    totalScore += rollScore;
-   lblScore.textContent = `Score: ${rollScore}`;
-   lblScoreHistory.textContent += `*Game ${rollCounter}: ${rollScore}* `;
+   lblRollScore.textContent = `Score: ${rollScore}`;
+   lblScoreHistory.textContent += `Game ${rollCounter}: ${rollScore}\n`;
 
    // Add a picture on winning roll
    switch(rollScore){

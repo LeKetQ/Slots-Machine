@@ -12,37 +12,36 @@
 </head>
 
 <body>
-    <h1 class="slot-machine">Lucky Seven Slots!</h1>
-    <div class="slot-machine">
-        <section id="fruitSlots">
-            <img></img>
-            <img></img>
-            <img></img>
-        </section>
-    </div>
+    <h1 id="title" class="slot-machine">Lucky Seven Slots!</h1>
 
-    <div class="slot-machine">
-        <section>
-            <button id="roll">Roll</button>
-            <button id="stop">Stop</button>
-            <button id="replay">Replay</button>
-        </section>
-    </div>
-
-    <div class="slot-machine">
-        <section>
-            <figure id="figure" class="feedbackImage"></figure>
-        </section>
-    </div>
-
-    <aside id="aside" class="slot-machine">
-        <section>
-        <label id="score">Score: </label><br />
-        <label id="scoreHistory">Score historiek: </label><br />
-        <label id="rollCounter">Aantal rolls: </label><br />
-        <label id="feedback"></label>
+    <section id="fruitSlots" class="slot-machine">
+        <img></img>
+        <img></img>
+        <img></img>
     </section>
-    </aside>
+
+    <section id="slotsButtons" class="slot-machine">
+        <button id="roll">Roll</button>
+        <button id="stop">Stop</button>
+        <button id="replay">Replay</button>
+    </section>
+
+    <section id="feedback" class="slot-machine">
+        <figure id="figure" class="slot-machine fruitImage"></figure>
+        <section id="score" class="slot-machine">
+            <label id="rollScore">Score: </label><br />
+            <label id="scoreHistory">Score history:
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </label><br />
+
+            <label id="rollCounter">Total rolls: </label><br />
+            <label id="feedbackLabel"></label>
+        </section>
+    </section>
 </body>
 
 </html>

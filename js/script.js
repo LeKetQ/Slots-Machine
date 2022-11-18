@@ -3,8 +3,7 @@
 window.addEventListener('load', initialise);
 
 // Global Variables
-const availableFruitImages = ["../img/fruits/appelsien.jpg", "../img/fruits/banaan.png", "../img/fruits/druif.jpg", "../img/fruits/kers.jpg", "../img/fruits/peer.png"];
-const cardsImages = ["../img/cards/clover.png", "../img/cards/diamond.png", "../img/cards/heart.png", "../img/cards/moneyBag.png", "../img/cards/spades.png"];
+const fruitImages = ["../img/fruits/cherry.png", "../img/fruits/goldBag.png", "../img/fruits/grapefruit.png", "../img/fruits/luckySeven.png", "../img/fruits/pomegranate.png"];
 let sctFruitSlots, btnRoll, btnStop, btnReplay, lblScore, lblRollCounter, lblScoreHistory, lblFeedback, figFeedback;
 let interval, rollCounter = 0, totalScore = 0;
 // ----------------------------------------
@@ -34,7 +33,7 @@ function bindElements() {
 function reset() {
    toggleButtonEvents();
    sctFruitSlots.forEach(slot => {
-      slot.src = "../img/casino-slot-machine.png";
+      slot.src = "../img/fruits/luckySeven.png";
       slot.classList.add('fruitImage');
    });
    rollCounter = 0;
@@ -60,8 +59,8 @@ function rollFruits() {
 // Spin the fruit images randomly
 function randomiseFruits() {
    sctFruitSlots.forEach(slot => {
-      let random = Math.floor(Math.random() * cardsImages.length);
-      slot.src = cardsImages[random];
+      let random = Math.floor(Math.random() * fruitImages.length);
+      slot.src = fruitImages[random];
    })
 };
 // ----------------------------------------
@@ -78,10 +77,10 @@ function stopFruits() {
    // Add a picture on winning roll
    switch(rollScore){
       case 200:
-         figFeedback.innerHTML = '<img src="./img/winner.gif">';
+         figFeedback.innerHTML = '<img class="fruitImage" src="./img/winner.gif">';
          break;
       case 300:
-         figFeedback.innerHTML = '<img src="./img/jackpot.gif">';
+         figFeedback.innerHTML = '<img class="fruitImage" src="./img/jackpot.gif">';
          break;
       default:
          figFeedback.innerHTML = '';

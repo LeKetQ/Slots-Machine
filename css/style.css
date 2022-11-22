@@ -1,4 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+@font-face {
+  font-family: "Bullpen";
+  src: url("../fonts/bullpen.ttf");
+}
 /* CSS Variables */
 
 :root {
@@ -15,11 +19,10 @@
 }
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: Bullpen;
   background-image: url('../img/slotsBackground.jpg');
   background-size: cover;
-  color: var(--black);
-
+  color: goldenrod;
   display: grid;
   grid-template-columns: auto;
   grid-template-rows: 1fr auto auto 7fr 1em;
@@ -59,12 +62,11 @@ body {
   grid-template-rows: auto;
   grid-template-areas:
       "rollHistory gameHistory";
-  color: var(--blue);
   font-weight: bold;
   font-size: small;
   width: 400px;
   height: 200px;
-  background-color: rgba(255,255,255, 0.8);
+  background-color: rgba(255,255,255, 0.9);
 }
 
 #rollHistory{
@@ -88,15 +90,9 @@ li{
   text-align: left;
 }
 
-
-h1, h2, h3, h4, h5, h6 {
-  color: var(--blue);
-}
-
 /* Buttons */
 
 button {
-  font-family: 'Open Sans', sans-serif;
   padding: 10px 20px;
   border-radius: 5px;
   border-style: solid;

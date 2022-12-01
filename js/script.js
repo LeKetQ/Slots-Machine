@@ -4,7 +4,8 @@ window.addEventListener('load', initialise);
 
 // Global Variables
 const fruitImages = ["../img/fruits/cherry.png", "../img/fruits/goldBag.png", "../img/fruits/grapefruit.png", "../img/fruits/luckySeven.png", "../img/fruits/pomegranate.png"];
-let sctFruitSlots, btnRoll, btnStop, btnReplay, lblRollScore, lblRollCounter, lblScoreHistory, lblTotalScore, lblGameOver, figFeedback, ulGameScore;
+let divFruitSlots, divButtons, divFeedback; 
+let btnRoll, btnStop, btnReplay, lblRollScore, lblRollCounter, lblScoreHistory, lblTotalScore, lblGameOver, figFeedback, ulGameScore;
 let interval, rollCounter = 0, totalScore = 0;
 // ----------------------------------------
 
@@ -17,24 +18,30 @@ function initialise() {
 
 // Element binding
 function bindElements() {
-   sctFruitSlots = document.querySelectorAll('#fruitSlots > img');
-   btnRoll = document.querySelector('#roll');
-   btnStop = document.querySelector('#stop');
-   btnReplay = document.querySelector('#replay');
-   lblRollScore = document.querySelector('#rollScore');
-   lblScoreHistory = document.querySelector('#scoreHistory');
-   lblRollCounter = document.querySelector('#rollCounter');
-   lblTotalScore = document.querySelector('#totalScore');
-   figFeedback = document.querySelector('#figure');
-   ulGameScore = document.querySelector('#gameScore');
-   lblGameOver = document.querySelector('#gameOver');
+   divFruitSlots = document.querySelectorAll('img');
+
+   divButtons = document.querySelectorAll('button');
+   btnRoll = divButtons[0];
+   btnStop = divButtons[1];
+   btnReplay = divButtons[2];
+
+   divFeedback = document.querySelectorAll('label');
+   lblRollScore = divFeedback[0];
+   lblRollCounter = divFeedback[1];
+   lblGameOver = divFeedback[2];
+   lblTotalScore = divFeedback[3];
+   lblScoreHistory = divFeedback[4];
+
+   figFeedback = document.querySelector('figure');
+   
+   ulGameScore = document.querySelector('ul');
 };
 // ----------------------------------------
 
 // Cascade for 'STARTUP' or 'REPLAY' button event
 function reset() {
    toggleButtonEvents();
-   sctFruitSlots.forEach(slot => {
+   divFruitSlots.forEach(slot => {
       slot.src = "../img/fruits/luckySeven.png";
       slot.classList.add('fruitImage');
    });
@@ -62,7 +69,7 @@ function rollFruits() {
 
 // Spin the fruit images randomly
 function randomiseFruits() {
-   sctFruitSlots.forEach(slot => {
+   divFruitSlots.forEach(slot => {
       let random = Math.floor(Math.random() * fruitImages.length);
       slot.src = fruitImages[random];
    })
@@ -116,7 +123,7 @@ function calculateScore() {
    let score = 0;
    let results = [];
 
-   sctFruitSlots.forEach(slot => {
+   divFruitSlots.forEach(slot => {
       results.push(slot.src);
    });
 

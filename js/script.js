@@ -3,7 +3,7 @@
 window.addEventListener('load', initialise);
 
 // Global Variables
-const fruitImages = ["../img/fruits/cherry.png", "../img/fruits/goldBag.png", "../img/fruits/grapefruit.png", "../img/fruits/luckySeven.png", "../img/fruits/pomegranate.png"];
+const fruitImages = ["./img/fruits/cherry.png", "./img/fruits/goldBag.png", "./img/fruits/grapefruit.png", "./img/fruits/luckySeven.png", "./img/fruits/pomegranate.png"];
 let divFruitSlots, divButtons, divFeedback; 
 let btnRoll, btnStop, btnReplay, lblRollScore, lblRollCounter, lblScoreHistory, lblTotalScore, lblGameOver, figFeedback, ulGameScore;
 let interval, rollCounter = 0, totalScore = 0;

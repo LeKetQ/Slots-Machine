@@ -42,7 +42,7 @@ function bindElements() {
 function reset() {
    toggleButtonEvents();
    divFruitSlots.forEach(slot => {
-      slot.src = "../img/fruits/luckySeven.png";
+      slot.src = "./img/fruits/luckySeven.png";
       slot.classList.add('fruitImage');
    });
    rollCounter = 0;
